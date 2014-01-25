@@ -1,0 +1,43 @@
+---
+indicator: submit
+auto_fieldset: 1
+
+elements:
+  - type: Text
+    name: bitcoin_address
+    label: Bitcoin address
+    constraints:
+      - Required
+      - type: Equal
+        others: bitcoin_address_2
+
+  - type: Text
+    name: bitcoin_address_2
+    label: Bitcoin address (repeat)
+    constraints:
+      - Required
+
+  - type: Text
+    name: amount
+    label: Amount
+    comment: Enter amount in BTC (not Chips). Minimum withdrawal amount - 0.01 BTC.
+    constraints:
+      - Required
+      - Number
+      - type: Callback
+        message: Incorrect value.
+
+  - type: Password
+    name: password
+    label: Current password
+    constraints:
+      - Required
+      - type: Callback
+        message: Incorrect old password.
+
+  - type: Submit
+    value: Withdraw
+    name: submit
+
+constraints:
+  - SingleValue

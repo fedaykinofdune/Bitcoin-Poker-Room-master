@@ -1,0 +1,27 @@
+<a id="logo" title="Homepage" href="/">
+  [% IF c.config.logo %]
+    <img src="[% c.config.logo %]" alt="[% c.config.name %]" />
+  [% ELSE %]
+    <div class="logo-top">[% c.config.name %]</div>
+    <div class="logo-slogan">[% c.config.slogan %] <span style="color: black;">&spades;</span>&#9825;</div>
+  [% END %]
+</a>
+
+<div id="main_navigation" class="main-menu ">
+  <ul class='menu-list'>
+    <li class='first'><a href='[% c.uri_for('/') %]'>Home</a></li>
+    <li><a href='[% c.uri_for('/tables') %]'>Tables</a></li>
+    <li><a href='[% c.uri_for('/tourneys') %]'>Tourneys</a></li>
+    [% IF c.user %]
+      <li><a href='[% c.uri_for('/tables/my') %]'>My tables</a></li>
+      <li><a href='[% c.uri_for('/user') %]'>My Account</a></li>
+      <li class='last'><a href='[% c.uri_for('/user/logout') %]'>Log Out</a></li>
+    [% ELSE %]
+      <li><a href='[% c.uri_for('/account/login') %]'>Log In</a></li>
+      <li class='last'><a href='[% c.uri_for('/account/register') %]'>Register</a></li>
+    [% END %]
+  </ul>
+</div>
+
+<div class="clear"></div>
+<!-- END site/header -->

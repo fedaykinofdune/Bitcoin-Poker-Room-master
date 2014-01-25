@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>[% page_title or template.title or site.title %]</title>
+  [% PROCESS site/styles %]
+  [% PROCESS site/js %]
+</head>
+<body>
+  <div id="wrapper">
+    <div class="center">
+      <div id="container">
+        [% content %]
+      </div>
+    </div>
+  </div>
+</body>
+</html>

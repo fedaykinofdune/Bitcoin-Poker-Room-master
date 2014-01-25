@@ -1,0 +1,13 @@
+[% META title = 'Edit Tourney Schedule' %]
+
+<div class="one">
+  <div class="one-fourth">
+    [% PROCESS admin/admin_submenu %]
+  </div>
+
+  <div>
+    [% form %]
+  </div>
+</div>
+
+<div class="clear"></div>

@@ -1,0 +1,88 @@
+[% META title = 'User account' %]
+
+<div class="one">
+
+  <div class="one-fourth">[% PROCESS user/user_menu %]</div>
+
+  <div class="inner-content last">
+    <div class="profile-avatar">
+      <img src="[% c.uri_for("/AVATAR/" _ c.user.serial) %]" alt="[% c.user.name %] picture" />
+      <br />
+      <p>To change your avatar, make sure you have valid email set in your account
+      and change your picture on <a href="http://gravatar.com/emails/" target="_blank">gravatar.com</a></p>
+    </div>
+
+    <h2 class="account-info">Account </h2>
+
+    <ul>
+      <li><strong>Username:</strong> [% c.user.name %]</li>
+      <li><strong>Email:</strong> [% c.user.email %]</li>
+      <li><strong>Emergency bitcoin address:</strong> [% c.user.emergency_address %]</li>
+      <li><strong>Password:</strong> ***********</li>
+    </ul>
+
+    [% IF c.user.balances %]
+    <h2>Your balance(s)</h2>
+
+    <table class="user-balances">
+      <tr><th>Currency</th><th>Chips</th><th>Bonus Points</th><th>Actions</th></tr>
+       
+      [% FOR balance IN c.user.balances %]
+        <tr>
+          <td>[% balance.currency.name %]</td>
+          <td>[% balance.amount / 100 | format('%.2f') %]</td>
+          <td>[% balance.points / 100 | format('%.2f') %]</td>
+          <td>
+            <a href="[% c.uri_for('/user/deposit/' _ balance.currency.id ) %]">Deposit</a> 
+            | <a href="[% c.uri_for('/user/withdraw/' _ balance.currency.id ) %]">Withdraw</a> 
+            | <a href="[% c.uri_for('/user/points_cashout/' _ balance.currency.id ) %]">Convert to chips</a>
+          </td>
+        </tr>
+      [% END %]
+    </table>
+    [% END %]
+
+
+    <div id='user-deposits'>
+      <h2 class="account-info">Deposits:</h2>
+
+      <table>
+        <tr><th>ID</th><th>Date</th><th>Amount</th></tr>
+        [% FOR deposit IN c.user.deposits %]
+          <tr><td>[% deposit.deposit_id %]</td><td>[% deposit.created_at %]</td><td>[% deposit.amount %]</td></tr>
+        [% END %]
+      </table>
+    </div>
+
+    <div id='user-withdrawal'>
+      <h2 class="account-info">Withdrawals:</h2>
+
+      <table class='withdrawals'>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Currency</th>
+            <th>Amount</th>
+            <th>Destination</th>
+            <th>Created</th>
+            <th>Processed</th>
+          </tr>
+        </thead>
+        <tbody>
+          [% FOR withdrawal IN c.user.withdrawals %]
+              <tr>
+                <td>[% withdrawal.id %]</td>
+                <td>[% withdrawal.currency.name %]</td>
+                <td>[% withdrawal.amount %]</td>
+                <td>[% withdrawal.dest  | html %]</td>
+                <td>[% withdrawal.created_at %]</td>
+                <td>[% withdrawal.processed_at %]</td>
+              </tr>
+          [% END %]
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="clear"></div>
